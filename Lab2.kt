@@ -24,36 +24,23 @@ fun main() {
 fun processList(inputList: List<Any?>?): List<ItemData>? {
     //Lista Output
     val outputList: MutableList<ItemData> = mutableListOf<ItemData>()
-    //Variables
-    var pos = 0 
     
     if(inputList == null) return null
-    for (item: Any? in inputList){
+    for ((pos, item) in inputList.withIndex()){
             //Verifica si el item es null para ignorarlo
             if(item != null){
                 outputList.add(when (item) {
                     //Caso Cadena
-                    is String -> {
-                        ItemData(pos, item, "cadena", "L"+item.length)
-                    }
+                    is String -> {ItemData(pos, item, "cadena", "L"+item.length)}
                     //Caso Entero
-                    is Int -> {
-                        //Multiplos
-                        ItemData(pos, item, "entero", if(item%10 == 0) "M10" else if (item%5 == 0) "M5" else if(item%2 == 0) "M2" else null)
-                    }
+                    is Int -> {ItemData(pos, item, "entero", if(item%10 == 0) "M10" else if (item%5 == 0) "M5" else if(item%2 == 0) "M2" else null)}
                     //Caso Booleano
-                    is Boolean -> {
-                        ItemData(pos, item, "booleano", if(item) "Verdadero" else "Falso")
-                    }
+                    is Boolean -> {ItemData(pos, item, "booleano", if(item) "Verdadero" else "Falso")}
                     //Caso de otro tipo
-                    else -> {
-                        ItemData(pos, item, null, null)
-                    }
+                    else -> {ItemData(pos, item, null, null)}
                }
                 )
             }
-            //Contador
-            pos += 1
         }
         return outputList
 }
