@@ -29,11 +29,8 @@ fun processList(inputList: List<Any?>?): List<ItemData>? {
     var typ: String?
     var inf: String? = ""
     
-    //Verifica si la lista es null
-    if(inputList == null){
-        return null
-    }else{
-    	for (item: Any? in inputList){
+    if(inputList == null) return null
+    for (item: Any? in inputList){
             //Verifica si el item es null para ignorarlo
             if(item != null){
                 when (item) {
@@ -46,25 +43,12 @@ fun processList(inputList: List<Any?>?): List<ItemData>? {
                     is Int -> {
                         typ = "entero"
                         //Multiplos
-                        if(item%10 == 0){
-                            inf = "M10"
-                        } else if (item%5 == 0){
-                            inf = "M5"
-                        } else if (item%2 == 0){
-                            inf = "M2"
-                        }else{
-                            inf = null
-                        }
+                        if(item%10 == 0) inf = "M10" else if (item%5 == 0) inf = "M5" else if(item%2 == 0) inf = "M2" else inf = null
                     }
                     //Caso Booleano
                     is Boolean -> {
                         typ = "booleano"
-                        if(item){
-                            inf = "Verdadero"
-                        }
-                        if(item == false){
-                            inf = "Falso"
-                        }
+                        if(item) inf = "Verdadero" else inf = "Falso"
                     }
                     //Caso de otro tipo
                     else -> {
@@ -72,7 +56,6 @@ fun processList(inputList: List<Any?>?): List<ItemData>? {
                         inf = null
                     }
                }
-                
                 //Item para output list
                 val newItem = ItemData(
                 originalPos = pos,
@@ -87,5 +70,4 @@ fun processList(inputList: List<Any?>?): List<ItemData>? {
             pos += 1
         }
         return outputList
-    }
 }
