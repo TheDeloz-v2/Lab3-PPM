@@ -26,45 +26,31 @@ fun processList(inputList: List<Any?>?): List<ItemData>? {
     val outputList: MutableList<ItemData> = mutableListOf<ItemData>()
     //Variables
     var pos = 0 
-    var typ: String?
-    var inf: String? = ""
     
     if(inputList == null) return null
     for (item: Any? in inputList){
             //Verifica si el item es null para ignorarlo
             if(item != null){
-                when (item) {
+                outputList.add(when (item) {
                     //Caso Cadena
                     is String -> {
-                        typ = "cadena"
-                        inf = ("L"+item.length)
+                        ItemData(pos, item, "cadena", "L"+item.length)
                     }
                     //Caso Entero
                     is Int -> {
-                        typ = "entero"
                         //Multiplos
-                        if(item%10 == 0) inf = "M10" else if (item%5 == 0) inf = "M5" else if(item%2 == 0) inf = "M2" else inf = null
+                        ItemData(pos, item, "entero", if(item%10 == 0) "M10" else if (item%5 == 0) "M5" else if(item%2 == 0) "M2" else null)
                     }
                     //Caso Booleano
                     is Boolean -> {
-                        typ = "booleano"
-                        if(item) inf = "Verdadero" else inf = "Falso"
+                        ItemData(pos, item, "booleano", if(item) "Verdadero" else "Falso")
                     }
                     //Caso de otro tipo
                     else -> {
-                        typ = null
-                        inf = null
+                        ItemData(pos, item, null, null)
                     }
                }
-                //Item para output list
-                val newItem = ItemData(
-                originalPos = pos,
-                originalValue = item,
-                type = typ,
-                info = inf
                 )
-                //Se agrega item a output list
-                outputList.add(newItem)
             }
             //Contador
             pos += 1
