@@ -22,25 +22,24 @@ fun main() {
 
 //Funcion ProcessList
 fun processList(inputList: List<Any?>?): List<ItemData>? {
-    //Lista Output
+    //Creacion de la outputList
     val outputList: MutableList<ItemData> = mutableListOf<ItemData>()
-    
-    if(inputList == null) return null
-    for ((pos, item) in inputList.withIndex()){
-            //Verifica si el item es null para ignorarlo
-            if(item != null){
-                outputList.add(when (item) {
-                    //Caso Cadena
-                    is String -> {ItemData(pos, item, "cadena", "L"+item.length)}
-                    //Caso Entero
-                    is Int -> {ItemData(pos, item, "entero", if(item%10 == 0) "M10" else if (item%5 == 0) "M5" else if(item%2 == 0) "M2" else null)}
-                    //Caso Booleano
-                    is Boolean -> {ItemData(pos, item, "booleano", if(item) "Verdadero" else "Falso")}
-                    //Caso de otro tipo
-                    else -> {ItemData(pos, item, null, null)}
-               }
-                )
-            }
+    //Verifica si la inputList es null
+    if (inputList == null) return null
+    for ((pos, item) in inputList.withIndex()) {
+        //Caso de item null para ignorarlo
+        if (item != null) {
+            outputList.add(when (item) {
+                //Caso Cadena
+                is String -> ItemData(pos, item, "cadena", "L"+item.length)
+                //Caso Entero
+                is Int -> ItemData(pos, item, "entero", if (item%10 == 0) "M10" else if (item%5 == 0) "M5" else if (item%2 == 0) "M2" else null)
+                //Caso Booleano
+                is Boolean -> ItemData(pos, item, "booleano", if (item) "Verdadero" else "Falso")
+                //Caso de otro tipo
+                else -> ItemData(pos, item, null, null)
+           })
         }
-        return outputList
+    }
+    return outputList
 }
