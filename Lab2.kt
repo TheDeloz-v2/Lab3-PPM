@@ -3,6 +3,7 @@
  * Secc. 20
  * Diego Lemus - 21469
  * Creacion: 15/07/2022
+ * - Modificacion: 24/07/2022
 */
 
 // No tocar esta clase ---
@@ -26,6 +27,7 @@ fun processList(inputList: List<Any?>?): List<ItemData>? {
     val outputList: MutableList<ItemData> = mutableListOf<ItemData>()
     //Verifica si la inputList es null
     if (inputList == null) return null
+    //Si la inputList posee items
     for ((pos, item) in inputList.withIndex()) {
         //Caso de item null para ignorarlo
         if (item != null) {
